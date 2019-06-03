@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import store, {UPDATE_USERNAME} from '../store';
 
 export default class Login extends Component {
     constructor() {
@@ -7,7 +8,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: ''
-        }
+        };
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
     }
@@ -15,13 +16,18 @@ export default class Login extends Component {
     handleUsernameChange(e) {
         this.setState({
             username: e.target.value
-        })
+        });
+        let action = {
+            type: UPDATE_USERNAME,
+            payload: e.target.value
+        };
+        store.dispatch(action);
     }
 
     handlePasswordChange(e) {
         this.setState({
             password: e.target.value
-        })
+        });
     }
 
     render() {
